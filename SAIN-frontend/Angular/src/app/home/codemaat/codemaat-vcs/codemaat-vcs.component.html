@@ -1,0 +1,215 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Code Maat Version Control Statistics</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Input) Input Log File: git log or svn log file<span class="text-danger">:</span></label>
+                                <input name="inputLogFile" type="text" class="form-control" formControlName="inputLogFile" [ngClass]="{ 'is-invalid': submitted &&  f.inputLogFile.errors}">                                
+                                <div *ngIf="submitted && f.inputLogFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputLogFile.errors.required">Required topic model input</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">(Output) Output File<span class="text-danger">:</span></label>
+                                <input name="outputFile" type="text" class="form-control" formControlName="outputFile" [ngClass]="{ 'is-invalid': submitted &&  f.outputFile.errors}">
+                                <div *ngIf="submitted && f.outputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.outputFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Version Control Type (default is git2)<span class="text-danger">:</span></label>                               
+                                <select formControlName="versionControlType" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.versionControlType.errors}" >
+                                    <option>git2</option> 
+                                    <option>git</option> 
+                                    <option>svn</option> 
+                                    <option>hg</option> 
+                                    <option>p4</option> 
+                                    <option>tfs</option>   
+                                </select>                                
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">The analysis to run (default is authors)<span class="text-danger">:</span></label>                               
+                                <select formControlName="analysis" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.analysis.errors}" >
+                                    <option>authors</option> 
+                                    <option>abs-churn</option> 
+                                    <option>age</option> 
+                                    <option>author-churn</option> 
+                                    <option>communication</option> 
+                                    <option>coupling</option> 
+                                    <option>entity-churn</option> 
+                                    <option>entity-effort</option> 
+                                    <option>entity-ownership</option> 
+                                    <option>fragmentation</option> 
+                                    <option>identity</option> 
+                                    <option>main-dev</option>
+                                    <option>main-dev-by-revs</option> 
+                                    <option>messages</option> 
+                                    <option>refactoring-main-dev</option> 
+                                    <option>revisions</option> 
+                                    <option>soc</option> 
+                                    <option>summary</option>
+                                </select>                                
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Input Encoding (default is UTF-8)<span class="text-danger">:</span></label>
+                                <input name="inputEncoding" type="text" class="form-control" formControlName="inputEncoding" [ngClass]="{ 'is-invalid': submitted &&  f.inputEncoding.errors}">
+                                <div *ngIf="submitted && f.inputEncoding.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputEncoding.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Max Rows in output (default is 0))<span class="text-danger">:</span></label>
+                                <input name="maxRows" type="text" class="form-control" formControlName="maxRows" [ngClass]="{ 'is-invalid': submitted &&  f.maxRows.errors}">                                
+                                <div *ngIf="submitted && f.maxRows.errors" class="invalid-feedback">
+                                    <div *ngIf="f.maxRows.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Minimum number of revisions to include an entity in the analysis (default is 5))<span class="text-danger">:</span></label>
+                                <input name="minRevisions" type="text" class="form-control" formControlName="minRevisions" [ngClass]="{ 'is-invalid': submitted &&  f.minRevisions.errors}">                                
+                                <div *ngIf="submitted && f.minRevisions.errors" class="invalid-feedback">
+                                    <div *ngIf="f.minRevisions.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Minimum number of shared revisions to include an entity in the analysis (default is 5))<span class="text-danger">:</span></label>
+                                <input name="minSharedRevisions" type="text" class="form-control" formControlName="minSharedRevisions" [ngClass]="{ 'is-invalid': submitted &&  f.minSharedRevisions.errors}">                                
+                                <div *ngIf="submitted && f.minSharedRevisions.errors" class="invalid-feedback">
+                                    <div *ngIf="f.minSharedRevisions.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Minimum degree of coupling (in percentage) to consider (default is 30)<span class="text-danger">:</span></label>
+                                <input name="minCouplings" type="text" class="form-control" formControlName="minCouplings" [ngClass]="{ 'is-invalid': submitted &&  f.minCouplings.errors}">                                
+                                <div *ngIf="submitted && f.minCouplings.errors" class="invalid-feedback">
+                                    <div *ngIf="f.minCouplings.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Maximum degree of coupling (in percentage) to consider (default is 100)<span class="text-danger">:</span></label>
+                                <input name="maxCouplings" type="text" class="form-control" formControlName="maxCouplings" [ngClass]="{ 'is-invalid': submitted &&  f.maxCouplings.errors}">                                
+                                <div *ngIf="submitted && f.maxCouplings.errors" class="invalid-feedback">
+                                    <div *ngIf="f.maxCouplings.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Maximum number of modules in a change set if it shall be included in a coupling analysis (default is 30)<span class="text-danger">:</span></label>
+                                <input name="maxChangeSetSize" type="text" class="form-control" formControlName="maxChangeSetSize" [ngClass]="{ 'is-invalid': submitted &&  f.maxChangeSetSize.errors}">                                
+                                <div *ngIf="submitted && f.maxChangeSetSize.errors" class="invalid-feedback">
+                                    <div *ngIf="f.maxChangeSetSize.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Group file: A file with a pre-defined set of layers. The data will be aggregated according to the group of layers<span class="text-danger">:</span></label>
+                                <input name="groupFile" type="text" class="form-control" formControlName="groupFile" [ngClass]="{ 'is-invalid': submitted &&  f.groupFile.errors}">                                
+                                <div *ngIf="submitted && f.groupFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.groupFile.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">A regex to match against commit messages. Used with -messages in analyses<span class="text-danger">:</span></label>
+                                <input name="regex" type="text" class="form-control" formControlName="regex" [ngClass]="{ 'is-invalid': submitted &&  f.regex.errors}">                                
+                                <div *ngIf="submitted && f.regex.errors" class="invalid-feedback">
+                                    <div *ngIf="f.regex.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Temporal Period: Instructs Code Maat to consider all commits during the same day as a single, logical commit  <span class="text-danger">:</span></label>                               
+                                <select formControlName="temporalPeriod" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.temporalPeriod.errors}" >
+                                    <option>null</option> 
+                                    <option>1</option>                                      
+                                </select>                                
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Age Time Now: Specify a date as YYYY-MM-dd that counts as time zero when doing a code age analysis (default 0 means none)<span class="text-danger">:</span></label>
+                                <input name="agetimeNow" type="text" class="form-control" formControlName="agetimeNow" [ngClass]="{ 'is-invalid': submitted &&  f.agetimeNow.errors}">                                
+                                <div *ngIf="submitted && f.agetimeNow.errors" class="invalid-feedback">
+                                    <div *ngIf="f.agetimeNow.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>

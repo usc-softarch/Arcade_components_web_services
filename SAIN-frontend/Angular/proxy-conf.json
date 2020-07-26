@@ -1,0 +1,11 @@
+{
+    "/engine/*":{
+        "target":"http://localhost:3000",      
+        "secure":false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "timeout": 3600000,
+        "proxyTimeout":3600000
+    }
+
+}

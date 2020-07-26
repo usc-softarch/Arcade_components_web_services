@@ -1,0 +1,204 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Mallet Train Classifier</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Input) Input File Path<span class="text-danger">:</span></label>
+                                <input name="inputFile" type="text" class="form-control" formControlName="inputFile" [ngClass]="{ 'is-invalid': submitted &&  f.inputFile.errors}">                                
+                                <div *ngIf="submitted && f.inputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputFile.errors.required">Required topic model input</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Output) Output Classifier File Name Path<span class="text-danger">:</span></label>
+                                <input name="outputClassifier" type="text" class="form-control" formControlName="outputClassifier" [ngClass]="{ 'is-invalid': submitted &&  f.outputClassifier.errors}">                                
+                                <div *ngIf="submitted && f.outputClassifier.errors" class="invalid-feedback">
+                                    <div *ngIf="f.outputClassifier.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Report<span class="text-danger">:</span></label>
+                                <input name="report" type="text" class="form-control" formControlName="report" [ngClass]="{ 'is-invalid': submitted &&  f.report.errors}">
+                                <div *ngIf="submitted && f.report.errors" class="invalid-feedback">
+                                    <div *ngIf="f.report.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">ClassifierTrainer constructor: Java code for the constructor used to create a ClassifierTrainer<span class="text-danger">:</span></label>
+                                <input name="trainer" type="text" class="form-control" formControlName="trainer" [ngClass]="{ 'is-invalid': submitted &&  f.trainer.errors}">
+                                <div *ngIf="submitted && f.trainer.errors" class="invalid-feedback">
+                                    <div *ngIf="f.trainer.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Training Portion: The fraction of the instances that should be used for training<span class="text-danger">:</span></label>
+                                <input name="trainingPortion" type="text" class="form-control" formControlName="trainingPortion" [ngClass]="{ 'is-invalid': submitted &&  f.trainingPortion.errors}">
+                                <div *ngIf="submitted && f.trainingPortion.errors" class="invalid-feedback">
+                                    <div *ngIf="f.trainingPortion.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Validation Portion: The fraction of the instances that should be used for validation<span class="text-danger">:</span></label>
+                                <input name="validationPortion" type="text" class="form-control" formControlName="validationPortion" [ngClass]="{ 'is-invalid': submitted &&  f.validationPortion.errors}">
+                                <div *ngIf="submitted && f.validationPortion.errors" class="invalid-feedback">
+                                    <div *ngIf="f.validationPortion.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Unlabeled Portion: The fraction of the training instances that should have their labels hidden<span class="text-danger">:</span></label>
+                                <input name="unlabeledPortion" type="text" class="form-control" formControlName="unlabeledPortion" [ngClass]="{ 'is-invalid': submitted &&  f.unlabeledPortionerrors}">
+                                <div *ngIf="submitted && f.unlabeledPortion.errors" class="invalid-feedback">
+                                    <div *ngIf="f.unlabeledPortion.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Random Seed<span class="text-danger">:</span></label>
+                                <input name="randomSeed" type="text" class="form-control" formControlName="randomSeed" [ngClass]="{ 'is-invalid': submitted &&  f.randomSeed.errors}">
+                                <div *ngIf="submitted && f.randomSeed.errors" class="invalid-feedback">
+                                    <div *ngIf="f.randomSeed.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>    
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Num Trials: The number of random train/test splits to perform<span class="text-danger">:</span></label>
+                                <input name="numTrials" type="text" class="form-control" formControlName="numTrials" [ngClass]="{ 'is-invalid': submitted &&  f.numTrials.errors}">
+                                <div *ngIf="submitted && f.numTrials.errors" class="invalid-feedback">
+                                    <div *ngIf="f.numTrials.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Classifier Evaluator: Java code for constructing a ClassifierEvaluating object<span class="text-danger">:</span></label>
+                                <input name="classifierEvaluator" type="text" class="form-control" formControlName="classifierEvaluator" [ngClass]="{ 'is-invalid': submitted &&  f.classifierEvaluator.errors}">
+                                <div *ngIf="submitted && f.classifierEvaluator.errors" class="invalid-feedback">
+                                    <div *ngIf="f.classifierEvaluator.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Verbosity: The level of messages to print: 0 is silent, 8 is most verbose. <br>Levels 0-8 correspond to the java.logger predefined levels off, severe, warning, info, config, fine, finer, finest, all. <br>The default value is taken from the mallet logging.properties file, which currently defaults to INFO level (3)<span class="text-danger">:</span></label>
+                                <input name="verbosity" type="text" class="form-control" formControlName="verbosity" [ngClass]="{ 'is-invalid': submitted &&  f.verbosity.errors}">
+                                <div *ngIf="submitted && f.verbosity.errors" class="invalid-feedback">
+                                    <div *ngIf="f.verbosity.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">No Overwrite Progress Message: Suppress writing-in-place on terminal for progess messages <br>- repetitive messages of which only the latest is generally of interest<span class="text-danger">:</span></label>                               
+                                <select formControlName="noOverwriteProgressMessages" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.noOverwriteProgressMessages.errors}" >
+                                    <option>true</option> 
+                                    <option>false</option>   
+                                </select>                                
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Cross Validation: The number of folds for cross-validation (DEFAULT=0)<span class="text-danger">:</span></label>
+                                <input name="crossValidation" type="text" class="form-control" formControlName="crossValidation" [ngClass]="{ 'is-invalid': submitted &&  f.crossValidation.errors}">
+                                <div *ngIf="submitted && f.crossValidation.errors" class="invalid-feedback">
+                                    <div *ngIf="f.crossValidation.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Training File: Read the training set instance list from this file<span class="text-danger">:</span></label>
+                                <input name="trainingFile" type="text" class="form-control" formControlName="trainingFile" [ngClass]="{ 'is-invalid': submitted &&  f.trainingFile.errors}">
+                                <div *ngIf="submitted && f.trainingFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.trainingFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Testing File: Read the test set instance list to this file<span class="text-danger">:</span></label>
+                                <input name="testingFile" type="text" class="form-control" formControlName="testingFile" [ngClass]="{ 'is-invalid': submitted &&  f.testingFile.errors}">
+                                <div *ngIf="submitted && f.testingFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.testingFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Validation File: Read the validation set instance list to this file<span class="text-danger">:</span></label>
+                                <input name="validationFile" type="text" class="form-control" formControlName="validationFile" [ngClass]="{ 'is-invalid': submitted &&  f.validationFile.errors}">
+                                <div *ngIf="submitted && f.validationFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.validationFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+

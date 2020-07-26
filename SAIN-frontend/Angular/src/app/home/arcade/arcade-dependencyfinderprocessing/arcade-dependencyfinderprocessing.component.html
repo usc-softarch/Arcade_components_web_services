@@ -1,0 +1,112 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Clean-up Code-Maat</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">                    
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">(Input) Project(s) source code dir path<span class="text-danger">:</span></label>
+                                <input name="inputDir" type="text" class="form-control" formControlName="inputDir" [ngClass]="{ 'is-invalid': submitted &&  f.inputDir.errors}">
+                                <div *ngIf="submitted && f.inputDir.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputDir.errors.required">Required clustered file output</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">(Input) cluster dir folder<span class="text-danger">:</span></label>
+                                <input name="clusterDir" type="text" class="form-control" formControlName="clusterDir" [ngClass]="{ 'is-invalid': submitted &&  f.clusterDir.errors}">
+                                <div *ngIf="submitted && f.clusterDir.errors" class="invalid-feedback">
+                                    <div *ngIf="f.clusterDir.errors.required">Required clustered file output</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">(Input) DepFinder dir folder<span class="text-danger">:</span></label>
+                                <input name="depFinderDir" type="text" class="form-control" formControlName="depFinderDir" [ngClass]="{ 'is-invalid': submitted &&  f.depFinderDir.errors}">
+                                <div *ngIf="submitted && f.depFinderDir.errors" class="invalid-feedback">
+                                    <div *ngIf="f.depFinderDir.errors.required">Required clustered file output</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">(Input) Clone dir folder<span class="text-danger">:</span></label>
+                                <input name="cloneDir" type="text" class="form-control" formControlName="cloneDir" [ngClass]="{ 'is-invalid': submitted &&  f.cloneDir.errors}">
+                                <div *ngIf="submitted && f.cloneDir.errors" class="invalid-feedback">
+                                    <div *ngIf="f.cloneDir.errors.required">Required clustered file output</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">(Input) Logical Dep File<span class="text-danger">:</span></label>
+                                <input name="logicalDepFile" type="text" class="form-control" formControlName="logicalDepFile" [ngClass]="{ 'is-invalid': submitted &&  f.logicalDepFile.errors}">
+                                <div *ngIf="submitted && f.logicalDepFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.logicalDepFile.errors.required">Required clustered file output</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">(Input) Package Name<span class="text-danger">:</span></label>
+                                <input name="packageName" type="text" class="form-control" formControlName="packageName" [ngClass]="{ 'is-invalid': submitted &&  f.packageName.errors}">
+                                <div *ngIf="submitted && f.packageName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.packageName.errors.required">Required clustered file output</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">(Output) Output deps.xml dir path<span class="text-danger">:</span></label>
+                                <input name="outputDir" type="text" class="form-control" formControlName="outputDir" [ngClass]="{ 'is-invalid': submitted &&  f.outputDir.errors}">
+                                <div *ngIf="submitted && f.outputDir.errors" class="invalid-feedback">
+                                    <div *ngIf="f.outputDir.errors.required">Required clustered file output</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>

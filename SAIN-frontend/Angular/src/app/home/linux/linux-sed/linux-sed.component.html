@@ -1,0 +1,85 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Linux Text Stream Editor</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">                    
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">                       
+                        
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">(Input) Input File Path<span class="text-danger">:</span></label>
+                                <input name="inputFile" type="text" class="form-control" formControlName="inputFile" [ngClass]="{ 'is-invalid': submitted &&  f.inputFile.errors}">
+                                <div *ngIf="submitted && f.inputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputFile.errors.required">Required field!</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Sed Command<span class="text-danger">:</span></label>
+                                <input name="sedCommand" type="text" class="form-control" formControlName="sedCommand" [ngClass]="{ 'is-invalid': submitted &&  f.sedCommand.errors}">
+                                <div *ngIf="submitted && f.sedCommand.errors" class="invalid-feedback">
+                                    <div *ngIf="f.sedCommand.errors.required">Required field!</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Extended Regular Expression<span class="text-danger">:</span></label>
+                                <input name="extendedRegex" type="text" class="form-control" formControlName="extendedRegex" [ngClass]="{ 'is-invalid': submitted &&  f.extendedRegex.errors}">
+                                <div *ngIf="submitted && f.extendedRegex.errors" class="invalid-feedback">
+                                    <div *ngIf="f.extendedRegex.errors.required">Required field!</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Sed Script File<span class="text-danger">:</span></label>
+                                <input name="sedCommandFile" type="text" class="form-control" formControlName="sedCommandFile" [ngClass]="{ 'is-invalid': submitted &&  f.sedCommandFile.errors}">
+                                <div *ngIf="submitted && f.sedCommandFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.sedCommandFile.errors.required">Required field!</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+

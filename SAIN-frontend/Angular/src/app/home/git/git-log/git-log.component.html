@@ -1,0 +1,159 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Git Log</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Input) Git Repo URL<span class="text-danger">:</span></label>
+                                <input name="gitRepoURL" type="text" class="form-control" formControlName="gitRepoURL" [ngClass]="{ 'is-invalid': submitted &&  f.gitRepoURL.errors}">                                
+                                <div *ngIf="submitted && f.gitRepoURL.errors" class="invalid-feedback">
+                                    <div *ngIf="f.gitRepoURL.errors.required">Required topic model input</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Shallow Since (YYYY-MM-DD)<span class="text-danger">:</span></label>
+                                <input name="shallowSince" type="text" class="form-control" formControlName="shallowSince" [ngClass]="{ 'is-invalid': submitted &&  f.shallowSince.errors}">
+                                <div *ngIf="submitted && f.shallowSince.errors" class="invalid-feedback">
+                                    <div *ngIf="f.shallowSince.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <label class="form-label">git log options <span class="text-danger">:</span></label>  
+                        <div class="form-row">                                     
+                            <div class="col form-group">                                
+                                <div class="icheck-primary"><input #follow type="checkbox" [checked]="false" formControlName="follow" id="follow" (change)="followCheckbox(follow.checked)"><label for="follow">--follow</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #source type="checkbox" [checked]="false" formControlName="source" id="source" (change)="sourceCheckbox(source.checked)"><label for="source">--source</label></div>
+                            </div>  
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #fulldiff type="checkbox" [checked]="false" formControlName="fulldiff" id="fulldiff" (change)="fulldiffCheckbox(fulldiff.checked)"><label for="fulldiff">--full-diff</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #logsize type="checkbox" [checked]="false" formControlName="logsize" id="logsize" (change)="logsizeCheckbox(logsize.checked)"><label for="logsize">--log-size</label></div>
+                            </div>                             
+                        </div>
+
+                        <label class="form-label">more options<span class="text-danger">:</span></label>  
+                        <div class="form-row">                                     
+                            <div class="col form-group">                                
+                                <div class="icheck-primary"><input #numstat type="checkbox" [checked]="false" formControlName="numstat" id="numstat" (change)="numstatCheckbox(numstat.checked)"><label for="numstat">--numstat</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #norenames type="checkbox" [checked]="false" formControlName="norenames" id="norenames" (change)="norenamesCheckbox(norenames.checked)"><label for="norenames">--no-renames</label></div>
+                            </div>  
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #allmatch type="checkbox" [checked]="false" formControlName="allmatch" id="allmatch" (change)="allmatchCheckbox(allmatch.checked)"><label for="allmatch">--all-match</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #invertgrep type="checkbox" [checked]="false" formControlName="invertgrep" id="invertgrep" (change)="invertgrepCheckbox(invertgrep.checked)"><label for="invertgrep">--invert-grep</label></div>
+                            </div>
+                            <div class="col form-group">                                
+                                <div class="icheck-primary"><input #regexpIgnorecase type="checkbox" [checked]="false" formControlName="regexpIgnorecase" id="regexpIgnorecase" (change)="regexpIgnorecaseCheckbox(regexpIgnorecase.checked)"><label for="regexpIgnorecase">--regexp-ignore-case</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #basicRegexp type="checkbox" [checked]="false" formControlName="basicRegexp" id="basicRegexp" (change)="basicRegexpCheckbox(basicRegexp.checked)"><label for="basicRegexp">--basic-regexp</label></div>
+                            </div>  
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #extendedRegexp type="checkbox" [checked]="false" formControlName="extendedRegexp" id="extendedRegexp" (change)="extendedRegexpCheckbox(extendedRegexp.checked)"><label for="extendedRegexp">--extended-regexp</label></div>
+                            </div> 
+                            
+                        </div>
+                        <div class="form-row">   
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #invertgrep type="checkbox" [checked]="false" formControlName="fixedstrings" id="fixedstrings" (change)="fixedstringsCheckbox(fixedstrings.checked)"><label for="fixedstrings">--fixed-strings</label></div>
+                            </div>   
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #perlRegexp type="checkbox" [checked]="false" formControlName="perlRegexp" id="perlRegexp" (change)="perlRegexpCheckbox(perlRegexp.checked)"><label for="perlRegexp">--perl-regexp</label></div>
+                            </div>  
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #removeEmpty type="checkbox" [checked]="false" formControlName="removeEmpty" id="removeEmpty" (change)="removeEmptyCheckbox(removeEmpty.checked)"><label for="removeEmpty">--remove-empty</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #merges type="checkbox" [checked]="false" formControlName="merges" id="merges" (change)="mergesCheckbox(merges.checked)"><label for="merges">--merges</label></div>
+                            </div>
+                            <div class="col form-group">                                
+                                <div class="icheck-primary"><input #nominParents type="checkbox" [checked]="false" formControlName="nominParents" id="nominParents" (change)="nominParentsCheckbox(nominParents.checked)"><label for="nominParents">--no-min-parents</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #nomaxParents type="checkbox" [checked]="false" formControlName="nomaxParents" id="nomaxParents" (change)="nomaxParentsCheckbox(nomaxParents.checked)"><label for="nomaxParents">--no-max-parents</label></div>
+                            </div>  
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #firstParent type="checkbox" [checked]="false" formControlName="firstParent" id="firstParent" (change)="firstParentCheckbox(firstParent.checked)"><label for="firstParent">--first-parent</label></div>
+                            </div> 
+                            
+                        </div>
+                        <div class="form-row">  
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #all type="checkbox" [checked]="false" formControlName="all" id="all" (change)="allCheckbox(all.checked)"><label for="all">--all</label></div>
+                            </div>  
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #reflog type="checkbox" [checked]="false" formControlName="reflog" id="reflog" (change)="reflogCheckbox(reflog.checked)"><label for="reflog">--reflog</label></div>
+                            </div> 
+                            <div class="col form-group">                                
+                                <div class="icheck-primary"><input #alternateRefs type="checkbox" [checked]="false" formControlName="alternateRefs" id="alternateRefs" (change)="alternateRefsCheckbox(alternateRefs.checked)"><label for="alternateRefs">--alternate-refs</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #singleworktree type="checkbox" [checked]="false" formControlName="singleworktree" id="singleworktree" (change)="singleworktreeCheckbox(singleworktree.checked)"><label for="singleworktree">--single-worktree</label></div>
+                            </div>  
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #ignoremissing type="checkbox" [checked]="false" formControlName="ignoremissing" id="ignoremissing" (change)="ignoremissingCheckbox(ignoremissing.checked)"><label for="ignoremissing">--ignore-missing</label></div>
+                            </div> 
+                            <div class="col form-group">
+                                <div class="icheck-primary"><input #boundary type="checkbox" [checked]="false" formControlName="boundary" id="boundary" (change)="boundaryCheckbox(boundary.checked)"><label for="boundary">--boundary</label></div>
+                            </div> 
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Optional Paramareters (i.e. --date=short --pretty=format:--%h--%ad--%aN)<span class="text-danger">:</span></label>
+                                <input name="optionalParams" type="text" class="form-control" formControlName="optionalParams" [ngClass]="{ 'is-invalid': submitted &&  f.optionalParams.errors}">
+                                <div *ngIf="submitted && f.optionalParams.errors" class="invalid-feedback">
+                                    <div *ngIf="f.optionalParams.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+                        
+                        
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,36 @@
+D:\joshuaga-arcade-21f0389ea498\joshuaga-arcade-21f0389ea498\subject_systems\Struts2\acdc\cluster
+('2.3.30', 'struts-2.3.30_acdc_clustered.rsf')
+('2.3.32', 'struts-2.3.32_acdc_clustered.rsf')
+('2.5.2', 'struts-2.5.2_acdc_clustered.rsf')
+('2.5.8', 'struts-2.5.8_acdc_clustered.rsf')
+('2.5.10.1', 'struts-2.5.10.1_acdc_clustered.rsf')
+ source coverage of source clusters from 2.3.30 to 2.3.32: 1.0
+ target coverage of source clusters from 2.3.30 to 2.3.32: 1.0
+ source coverage of source clusters from 2.3.30 to 2.5.2: 0.647727272727
+ target coverage of source clusters from 2.3.30 to 2.5.2: 0.581632653061
+ source coverage of source clusters from 2.3.30 to 2.5.8: 0.636363636364
+ target coverage of source clusters from 2.3.30 to 2.5.8: 0.577319587629
+ source coverage of source clusters from 2.3.30 to 2.5.10.1: 0.625
+ target coverage of source clusters from 2.3.30 to 2.5.10.1: 0.567010309278
+
+
+ source coverage of source clusters from 2.3.32 to 2.5.2: 0.636363636364
+ target coverage of source clusters from 2.3.32 to 2.5.2: 0.571428571429
+ source coverage of source clusters from 2.3.32 to 2.5.8: 0.647727272727
+ target coverage of source clusters from 2.3.32 to 2.5.8: 0.587628865979
+ source coverage of source clusters from 2.3.32 to 2.5.10.1: 0.636363636364
+ target coverage of source clusters from 2.3.32 to 2.5.10.1: 0.577319587629
+
+
+ source coverage of source clusters from 2.5.2 to 2.5.8: 0.969387755102
+ target coverage of source clusters from 2.5.2 to 2.5.8: 0.979381443299
+ source coverage of source clusters from 2.5.2 to 2.5.10.1: 0.948979591837
+ target coverage of source clusters from 2.5.2 to 2.5.10.1: 0.958762886598
+
+
+ source coverage of source clusters from 2.5.8 to 2.5.10.1: 0.979381443299
+ target coverage of source clusters from 2.5.8 to 2.5.10.1: 0.979381443299
+
+
+
+

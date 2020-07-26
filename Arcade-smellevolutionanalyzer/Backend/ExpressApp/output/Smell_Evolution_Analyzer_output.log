@@ -1,0 +1,17 @@
+File: logs/root.log
+2.3.30
+2.3.32
+2.5.2
+2.5.8
+2.5.10.1
+
+DescriptiveStatistics:
+n: 5
+min: 13.0
+max: 16.0
+mean: 14.2
+std dev: 1.3038404810405297
+median: 14.0
+skewness: 0.5413870509510876
+kurtosis: -1.487889273356398
+

@@ -1,0 +1,129 @@
+INFO  - Reading in clusters file: D:\joshuaga-arcade-21f0389ea498\joshuaga-arcade-21f0389ea498\subject_systems\Struts2\acdc\dep\struts-2.5.10.1_deps_pkgs.rsf
+DEBUG - Elapsed time in milliseconds: 24
+DEBUG - Found and built clusters:
+DEBUG - org.apache.struts2.interceptor
+DEBUG - org.apache.struts2.osgi.loaders
+DEBUG - org.apache.struts2.osgi.interceptor
+DEBUG - org.apache.struts2.portlet.result
+DEBUG - org.apache.struts2.jasper.security
+DEBUG - org.apache.struts2.jasper.servlet
+DEBUG - org.apache.struts2.jasper.xmlparser
+DEBUG - org.apache.struts2.jasper.runtime
+DEBUG - org.apache.struts2
+DEBUG - org.apache.struts2.dispatcher.filter
+DEBUG - org.apache.struts2.compiler
+DEBUG - org.apache.struts2.rest.handler
+DEBUG - org.apache.struts2.cdi
+DEBUG - org.apache.struts2.dispatcher.multipart
+DEBUG - org.apache.struts2.sitemesh
+DEBUG - org.apache.struts2.interceptor.debugging
+DEBUG - org.apache.struts2.interceptor.validation
+DEBUG - org.apache.struts2.oval.interceptor
+DEBUG - org.apache.struts2.json.rpc
+DEBUG - org.apache.struts2.oval.annotation
+DEBUG - org.apache.struts2.jasper.tagplugins.jstl.core
+DEBUG - org.apache.struts2.sitegraph.renderers
+DEBUG - org.apache.struts2.el.util
+DEBUG - org.apache.struts2.sitegraph.entities
+DEBUG - org.apache.struts2.portlet.dispatcher
+DEBUG - org.apache.struts2.portlet.util
+DEBUG - org.apache.struts2.json
+DEBUG - org.apache.struts2.convention.annotation
+DEBUG - org.apache.struts2.spring
+DEBUG - org.apache.struts2.tiles
+DEBUG - org.apache.struts2.el.lang
+DEBUG - org.apache.struts2.osgi.admin.actions
+DEBUG - org.apache.struts2.rest
+DEBUG - org.apache.struts2.jasper.util
+DEBUG - org.apache.struts2.jasper.el
+DEBUG - org.apache.struts2.el.parser
+DEBUG - org.apache.struts2.dispatcher
+DEBUG - org.apache.struts2.portlet.interceptor
+DEBUG - org.apache.struts2.json.annotations
+DEBUG - org.apache.struts2.osgi
+DEBUG - org.apache.struts2.dispatcher.mapper
+DEBUG - org.apache.struts2.json.smd
+DEBUG - org.apache.struts2.interceptor.servlet
+DEBUG - org.apache.struts2.portlet.servlet
+DEBUG - org.apache.struts2.convention
+DEBUG - org.apache.struts2.sitegraph.model
+DEBUG - org.apache.struts2.el
+DEBUG - org.apache.struts2.plexus
+DEBUG - org.apache.struts2.portlet
+DEBUG - org.apache.struts2.components.template
+DEBUG - org.apache.struts2.sitegraph
+DEBUG - org.apache.struts2.config_browser
+DEBUG - org.apache.struts2.dispatcher.servlet
+DEBUG - org.apache.struts2.jasper.tagplugins.jstl
+DEBUG - org.apache.struts2.config
+DEBUG - org.apache.struts2.conversion
+DEBUG - org.apache.struts2.json.bridge
+DEBUG - org.apache.struts2.jasper
+DEBUG - org.apache.struts2.dispatcher.listener
+DEBUG - org.apache.struts2.result
+DEBUG - org.apache.struts2.osgi.host
+DEBUG - org.apache.struts2.jasper.compiler
+DEBUG - org.apache.struts2.portlet.context
+DEBUG - org.apache.struts2.jasper.compiler.tagplugin
+DEBUG - org.apache.struts2.components
+DEBUG - org.apache.struts2.factory
+INFO  - Reading in deps file: D:\joshuaga-arcade-21f0389ea498\joshuaga-arcade-21f0389ea498\subject_systems\Struts2\acdc\cluster\struts-2.5.10.1_acdc_clustered.rsf
+DEBUG - Elapsed time in milliseconds: 55
+DEBUG - No. of vertices: 66
+DEBUG - No. of edges: 0
+DEBUG - # actual edges: 0
+DEBUG - # potential edges: 4290
+INFO  - rci: 0.0
+INFO  - no. of two-way pairs: 0
+INFO  - no. of two-way pairs / all possible pairs: 0.0
+INFO  - avg stability: 0.0
+DEBUG - Elapsed time in milliseconds: 51
+DEBUG - Elapsed time in milliseconds: 15
+INFO  - MQ: 0.0
+INFO  - # of clusters: 66
+INFO  - MQ ratio: 0.0
+INFO  - 
+INFO  - stats for rci
+INFO  - DescriptiveStatistics:
+n: 9
+min: 0.0
+max: 0.0
+mean: 0.0
+std dev: 0.0
+median: 0.0
+skewness: NaN
+kurtosis: NaN
+
+INFO  - stats for twoway
+INFO  - DescriptiveStatistics:
+n: 9
+min: 0.0
+max: 0.0
+mean: 0.0
+std dev: 0.0
+median: 0.0
+skewness: NaN
+kurtosis: NaN
+
+INFO  - stats for stability
+INFO  - DescriptiveStatistics:
+n: 9
+min: 0.0
+max: 0.0
+mean: 0.0
+std dev: 0.0
+median: 0.0
+skewness: NaN
+kurtosis: NaN
+
+INFO  - stats for mq
+INFO  - DescriptiveStatistics:
+n: 9
+min: 0.0
+max: 0.0
+mean: 0.0
+std dev: 0.0
+median: 0.0
+skewness: NaN
+kurtosis: NaN
+

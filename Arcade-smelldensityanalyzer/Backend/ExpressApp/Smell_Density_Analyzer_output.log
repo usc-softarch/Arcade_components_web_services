@@ -1,0 +1,63 @@
+compareTo 2.3.32 to 2.3.30: 1
+compareTo 2.5.10.1 to 2.3.32: 1
+compareTo 2.5.2 to 2.5.10.1: -1
+compareTo 2.5.2 to 2.3.32: 1
+compareTo 2.5.2 to 2.5.10.1: -1
+compareTo 2.5.8 to 2.5.2: 1
+compareTo 2.5.8 to 2.5.10.1: -1
+compareTo 2.3.32 to 2.3.30: 1
+compareTo 2.5.2 to 2.3.32: 1
+compareTo 2.5.8 to 2.5.2: 1
+compareTo 2.5.10.1 to 2.5.8: 1
+version: 2.3.30
+# smells: 15
+# clusters: 88
+smell density: 0.17045454545454544
+ratio of smelly clusters to total clusters: 0.9431818181818182
+
+version: 2.3.32
+# smells: 14
+# clusters: 88
+smell density: 0.1590909090909091
+ratio of smelly clusters to total clusters: 0.9318181818181818
+
+version: 2.5.2
+# smells: 13
+# clusters: 98
+smell density: 0.1326530612244898
+ratio of smelly clusters to total clusters: 0.9387755102040817
+
+version: 2.5.8
+# smells: 13
+# clusters: 97
+smell density: 0.13402061855670103
+ratio of smelly clusters to total clusters: 0.9587628865979382
+
+version: 2.5.10.1
+# smells: 16
+# clusters: 97
+smell density: 0.16494845360824742
+ratio of smelly clusters to total clusters: 0.9587628865979382
+
+Smell density stats:
+DescriptiveStatistics:
+n: 5
+min: 0.1326530612244898
+max: 0.17045454545454544
+mean: 0.15223351758697856
+std dev: 0.017718657082748956
+median: 0.1590909090909091
+skewness: -0.3835654438532531
+kurtosis: -2.9830285757728987
+
+Clusters ratio stats:
+DescriptiveStatistics:
+n: 5
+min: 0.9318181818181818
+max: 0.9587628865979382
+mean: 0.9462602566799916
+std dev: 0.012110979000890754
+median: 0.9431818181818182
+skewness: 0.10508256330063427
+kurtosis: -2.4454034556444997
+

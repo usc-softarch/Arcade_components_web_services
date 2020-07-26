@@ -1,0 +1,103 @@
+DEBUG - compareTo 2.3.32 to 2.3.30: 1
+DEBUG - compareTo 2.5.10.1 to 2.3.32: 1
+DEBUG - compareTo 2.5.2 to 2.5.10.1: -1
+DEBUG - compareTo 2.5.2 to 2.3.32: 1
+DEBUG - compareTo 2.5.2 to 2.5.10.1: -1
+DEBUG - compareTo 2.5.8 to 2.5.2: 1
+DEBUG - compareTo 2.5.8 to 2.5.10.1: -1
+DEBUG - struts-2.3.30_acdc_smells.ser
+DEBUG - 	contains 15 smells
+DEBUG - 	Listing detected smells for filestruts-2.3.30_acdc_smells.ser: 
+DEBUG - 	bdc org.apache.struts2.el.ss,org.apache.struts2.views.freemarker.tags.ss,org.apache.struts2.config.ss,org.apache.struts2.interceptor.ss,org.apache.struts2.s1.ss,org.apache.struts2.components.ss,org.apache.struts2.jasper.ss,org.apache.struts2.portlet.util.ss,org.apache.struts2.dojo.views.jsp.ui.ss,org.apache.struts.config.ss,org.apache.struts2.validators.ss,org.apache.struts2.osgi.admin.actions.ss,org.apache.struts2.ss,org.apache.struts2.interceptor.debugging.ss,org.apache.struts2.factory.ss,org.apache.struts2.tiles.ss,org.apache.struts.chain.commands.ss,org.apache.struts2.json.annotations.ss,org.apache.struts.upload.ss,org.apache.struts2.views.velocity.components.ss,org.apache.struts2.oval.interceptor.ss,org.apache.struts2.views.jsp.ui.ss,org.apache.struts2.dispatcher.ng.servlet.ss,org.apache.struts2.dispatcher.multipart.ss,org.apache.struts2.jasper.el.ss,org.apache.struts2.dojo.views.ss,org.apache.struts2.convention.ss,org.apache.struts2.util.fs.ss,org.apache.struts2.dispatcher.ng.filter.ss,org.apache.struts2.views.java.ss,org.apache.struts2.rest.ss,org.apache.struts2.dojo.views.freemarker.tags.ss,org.apache.struts2.jasper.xmlparser.ss,org.apache.struts2.views.gxp.ss,org.apache.struts2.portlet.dispatcher.ss,org.apache.struts2.views.tiles.ss,org.apache.struts.validator.validwhen.ss,org.apache.struts2.views.jsp.iterator.ss,org.apache.struts2.sitegraph.ss,org.apache.struts2.json.smd.ss,org.apache.struts2.sitegraph.renderers.ss,org.apache.struts2.util.tomcat.buf.ss,org.apache.struts.chain.contexts.ss,org.apache.struts2.views.ss,org.apache.struts.mock.ss,org.apache.struts2.config_browser.ss,org.apache.struts2.el.parser.ss,org.apache.struts2.osgi.host.ss,org.apache.struts.util.ss,org.apache.struts2.views.jsp.ss,org.apache.struts2.views.xslt.ss,org.apache.struts2.interceptor.validation.ss,org.apache.struts2.plexus.ss,org.apache.struts2.portlet.interceptor.ss,org.apache.struts2.spring.ss,org.apache.struts.chain.commands.servlet.ss,org.apache.struts2.jasper.compiler.ss,org.apache.struts2.jsf.ss,org.apache.struts2.osgi.interceptor.ss,org.apache.struts2.el.lang.ss,org.apache.struts2.portlet.ss,org.apache.struts2.dispatcher.mapper.ss,org.apache.struts.validator.ss,org.apache.struts2.jasper.servlet.ss,org.apache.struts2.el.util.ss,org.apache.struts2.dispatcher.ng.listener.ss,org.apache.struts2.portlet.servlet.ss,org.apache.struts2.views.java.simple.ss,org.apache.struts2.views.freemarker.ss,actions.osgi.ss,org.apache.struts2.views.jasperreports.ss,org.apache.struts2.jasper.runtime.ss,org.apache.struts2.json.ss,org.apache.struts2.codebehind.ss,org.apache.struts2.jasper.tagplugins.jstl.ss,org.apache.struts2.util.ss,org.apache.struts2.portlet.result.ss,org.apache.struts2.dispatcher.ss,org.apache.struts2.osgi.ss,org.apache.struts2.components.template.ss,org.apache.struts2.sitemesh.ss,org.apache.struts.action.ss,org.apache.struts2.views.velocity.ss
+DEBUG - 	buo org.apache.struts2.views.freemarker.tags.ss
+DEBUG - 	buo org.apache.struts2.config.ss
+DEBUG - 	buo org.apache.struts2.s1.ss
+DEBUG - 	buo org.apache.struts2.components.ss
+DEBUG - 	buo org.apache.struts.config.ss
+DEBUG - 	buo org.apache.struts2.ss
+DEBUG - 	buo org.apache.struts.mock.ss
+DEBUG - 	buo org.apache.struts2.views.ss
+DEBUG - 	buo org.apache.struts2.el.parser.ss
+DEBUG - 	buo org.apache.struts2.views.xslt.ss
+DEBUG - 	buo org.apache.struts2.jasper.compiler.ss
+DEBUG - 	buo org.apache.struts2.views.java.simple.ss
+DEBUG - 	buo org.apache.struts2.json.ss
+DEBUG - 	buo org.apache.struts2.dispatcher.ss
+DEBUG - struts-2.3.32_acdc_smells.ser
+DEBUG - 	contains 14 smells
+DEBUG - 	Listing detected smells for filestruts-2.3.32_acdc_smells.ser: 
+DEBUG - 	bdc org.apache.struts2.el.ss,org.apache.struts2.views.freemarker.tags.ss,org.apache.struts2.config.ss,org.apache.struts2.interceptor.ss,org.apache.struts2.s1.ss,org.apache.struts2.components.ss,org.apache.struts2.jasper.ss,org.apache.struts2.portlet.util.ss,org.apache.struts2.dojo.views.jsp.ui.ss,org.apache.struts.config.ss,org.apache.struts2.validators.ss,org.apache.struts2.osgi.admin.actions.ss,org.apache.struts2.ss,org.apache.struts2.interceptor.debugging.ss,org.apache.struts2.factory.ss,org.apache.struts2.tiles.ss,org.apache.struts.chain.commands.ss,org.apache.struts2.json.annotations.ss,org.apache.struts.upload.ss,org.apache.struts2.views.velocity.components.ss,org.apache.struts2.oval.interceptor.ss,org.apache.struts2.views.jsp.ui.ss,org.apache.struts2.dispatcher.ng.servlet.ss,org.apache.struts2.dispatcher.multipart.ss,org.apache.struts2.jasper.el.ss,org.apache.struts2.dojo.views.ss,org.apache.struts2.convention.ss,org.apache.struts2.util.fs.ss,org.apache.struts2.dispatcher.ng.filter.ss,org.apache.struts2.views.java.ss,org.apache.struts2.rest.ss,org.apache.struts2.dojo.views.freemarker.tags.ss,org.apache.struts2.jasper.xmlparser.ss,org.apache.struts2.views.gxp.ss,org.apache.struts2.portlet.dispatcher.ss,org.apache.struts2.views.tiles.ss,org.apache.struts.validator.validwhen.ss,org.apache.struts2.views.jsp.iterator.ss,org.apache.struts2.sitegraph.ss,org.apache.struts2.json.smd.ss,org.apache.struts2.sitegraph.renderers.ss,org.apache.struts2.util.tomcat.buf.ss,org.apache.struts.chain.contexts.ss,org.apache.struts2.views.ss,org.apache.struts.mock.ss,org.apache.struts2.config_browser.ss,org.apache.struts2.el.parser.ss,org.apache.struts2.osgi.host.ss,org.apache.struts.util.ss,org.apache.struts2.views.jsp.ss,org.apache.struts2.views.xslt.ss,org.apache.struts2.interceptor.validation.ss,org.apache.struts2.plexus.ss,org.apache.struts2.portlet.interceptor.ss,org.apache.struts2.spring.ss,org.apache.struts.chain.commands.servlet.ss,org.apache.struts2.jasper.compiler.ss,org.apache.struts2.jsf.ss,org.apache.struts2.osgi.interceptor.ss,org.apache.struts2.el.lang.ss,org.apache.struts2.portlet.ss,org.apache.struts2.dispatcher.mapper.ss,org.apache.struts.validator.ss,org.apache.struts2.jasper.servlet.ss,org.apache.struts2.el.util.ss,org.apache.struts2.dispatcher.ng.listener.ss,org.apache.struts2.portlet.servlet.ss,org.apache.struts2.views.java.simple.ss,org.apache.struts2.views.freemarker.ss,org.apache.struts2.views.jasperreports.ss,org.apache.struts2.jasper.runtime.ss,org.apache.struts2.json.ss,org.apache.struts2.codebehind.ss,org.apache.struts2.jasper.tagplugins.jstl.ss,org.apache.struts2.util.ss,org.apache.struts2.portlet.result.ss,org.apache.struts2.dispatcher.ss,org.apache.struts2.osgi.ss,org.apache.struts2.components.template.ss,org.apache.struts2.sitemesh.ss,org.apache.struts.action.ss,org.apache.struts2.views.velocity.ss
+DEBUG - 	buo org.apache.struts2.views.freemarker.tags.ss
+DEBUG - 	buo org.apache.struts2.s1.ss
+DEBUG - 	buo org.apache.struts2.components.ss
+DEBUG - 	buo org.apache.struts.config.ss
+DEBUG - 	buo org.apache.struts2.ss
+DEBUG - 	buo org.apache.struts.mock.ss
+DEBUG - 	buo org.apache.struts2.views.ss
+DEBUG - 	buo org.apache.struts2.el.parser.ss
+DEBUG - 	buo org.apache.struts2.views.xslt.ss
+DEBUG - 	buo org.apache.struts2.jasper.compiler.ss
+DEBUG - 	buo org.apache.struts2.views.java.simple.ss
+DEBUG - 	buo org.apache.struts2.json.ss
+DEBUG - 	buo org.apache.struts2.dispatcher.ss
+DEBUG - struts-2.5.2_acdc_smells.ser
+DEBUG - 	contains 13 smells
+DEBUG - 	Listing detected smells for filestruts-2.5.2_acdc_smells.ser: 
+DEBUG - 	bdc org.apache.struts2.views.freemarker.tags.ss,org.apache.struts2.el.ss,org.apache.struts2.config.ss,org.apache.struts2.interceptor.ss,org.apache.struts2.osgi.loaders.ss,org.apache.struts2.components.ss,org.apache.struts2.jasper.ss,org.apache.struts2.portlet.util.ss,com.opensymphony.xwork2.spring.ss,com.opensymphony.xwork2.ognl.ss,org.apache.struts2.validators.ss,com.opensymphony.xwork2.util.profiling.ss,org.apache.struts2.osgi.admin.actions.ss,org.apache.struts2.ss,com.opensymphony.xwork2.interceptor.annotations.ss,org.apache.struts2.interceptor.debugging.ss,org.apache.struts2.factory.ss,org.apache.struts2.tiles.ss,com.opensymphony.xwork2.inject.ss,org.apache.struts2.json.annotations.ss,org.apache.struts2.views.velocity.components.ss,org.apache.struts2.oval.interceptor.ss,org.apache.struts2.views.jsp.ui.ss,com.opensymphony.xwork2.util.finder.ss,org.apache.struts2.jasper.el.ss,org.apache.struts2.convention.ss,com.opensymphony.xwork2.util.location.ss,com.opensymphony.xwork2.util.logging.log4j2.ss,org.apache.struts2.views.java.ss,org.apache.struts2.rest.ss,org.apache.struts2.jasper.xmlparser.ss,org.apache.struts2.views.gxp.ss,org.apache.struts2.portlet.dispatcher.ss,org.apache.struts2.views.tiles.ss,com.opensymphony.xwork2.ognl.accessor.ss,org.apache.struts2.dispatcher.listener.ss,com.opensymphony.xwork2.config.entities.ss,org.apache.struts2.views.jsp.iterator.ss,org.apache.struts2.sitegraph.ss,org.apache.struts2.json.smd.ss,org.apache.struts2.sitegraph.renderers.ss,org.apache.struts2.util.tomcat.buf.ss,com.opensymphony.xwork2.util.logging.jdk.ss,org.apache.struts2.views.ss,com.opensymphony.xwork2.util.logging.commons.ss,com.opensymphony.xwork2.conversion.impl.ss,org.apache.struts2.config_browser.ss,org.apache.struts2.el.parser.ss,org.apache.struts2.osgi.host.ss,com.opensymphony.xwork2.inject.util.ss,org.apache.struts2.result.ss,org.apache.struts2.views.jsp.ss,com.opensymphony.xwork2.util.classloader.ss,org.apache.struts2.views.xslt.ss,com.opensymphony.xwork2.config.impl.ss,com.opensymphony.xwork2.util.logging.ss,org.apache.struts2.plexus.ss,org.apache.struts2.spring.ss,org.apache.struts2.portlet.interceptor.ss,com.opensymphony.xwork2.config.providers.ss,org.apache.struts2.jasper.compiler.ss,org.apache.struts2.dispatcher.filter.ss,org.apache.struts2.osgi.interceptor.ss,org.apache.struts2.el.lang.ss,org.apache.struts2.portlet.ss,org.apache.struts2.dispatcher.mapper.ss,org.apache.struts2.dispatcher.servlet.ss,com.opensymphony.xwork2.util.logging.slf4j.ss,org.apache.struts2.jasper.servlet.ss,org.apache.struts2.el.util.ss,org.apache.struts2.portlet.servlet.ss,org.apache.struts2.views.freemarker.ss,org.apache.struts2.views.java.simple.ss,actions.osgi.ss,org.apache.struts2.views.jasperreports.ss,org.apache.struts2.jasper.runtime.ss,org.apache.struts2.json.ss,com.opensymphony.xwork2.config.ss,com.opensymphony.xwork2.util.ss,org.apache.struts2.jasper.tagplugins.jstl.ss,com.opensymphony.xwork2.interceptor.ss,org.apache.struts.beanvalidation.validation.interceptor.ss,org.apache.struts2.util.ss,org.apache.struts2.portlet.result.ss,com.opensymphony.xwork2.validator.ss,org.apache.struts2.dispatcher.ss,org.apache.struts2.osgi.ss,org.apache.struts2.sitemesh.ss,org.apache.struts2.components.template.ss,com.opensymphony.xwork2.ss,com.opensymphony.xwork2.validator.validators.ss,org.apache.struts2.views.velocity.ss
+DEBUG - 	buo org.apache.struts2.rest.ss
+DEBUG - 	buo org.apache.struts2.views.ss
+DEBUG - 	buo org.apache.struts2.el.parser.ss
+DEBUG - 	buo org.apache.struts2.views.xslt.ss
+DEBUG - 	buo com.opensymphony.xwork2.config.providers.ss
+DEBUG - 	buo org.apache.struts2.views.java.simple.ss
+DEBUG - 	buo org.apache.struts2.dispatcher.ss
+DEBUG - 	buo org.apache.struts2.components.ss
+DEBUG - 	buo org.apache.struts2.ss
+DEBUG - 	buo org.apache.struts2.jasper.compiler.ss
+DEBUG - 	buo org.apache.struts2.jasper.runtime.ss
+DEBUG - 	buo org.apache.struts2.json.ss
+DEBUG - struts-2.5.8_acdc_smells.ser
+DEBUG - 	contains 13 smells
+DEBUG - 	Listing detected smells for filestruts-2.5.8_acdc_smells.ser: 
+DEBUG - 	bdc org.apache.struts2.views.freemarker.tags.ss,org.apache.struts2.el.ss,org.apache.struts2.config.ss,org.apache.struts2.interceptor.ss,org.apache.struts2.osgi.loaders.ss,org.apache.struts2.components.ss,org.apache.struts2.jasper.ss,org.apache.struts2.portlet.util.ss,com.opensymphony.xwork2.spring.ss,com.opensymphony.xwork2.ognl.ss,org.apache.struts2.validators.ss,com.opensymphony.xwork2.util.profiling.ss,org.apache.struts2.osgi.admin.actions.ss,org.apache.struts2.ss,com.opensymphony.xwork2.interceptor.annotations.ss,org.apache.struts2.factory.ss,org.apache.struts2.interceptor.debugging.ss,org.apache.struts2.tiles.ss,com.opensymphony.xwork2.inject.ss,org.apache.struts2.json.annotations.ss,org.apache.struts2.views.velocity.components.ss,org.apache.struts2.oval.interceptor.ss,org.apache.struts2.views.jsp.ui.ss,org.apache.struts2.dispatcher.multipart.ss,com.opensymphony.xwork2.util.finder.ss,org.apache.struts2.jasper.el.ss,org.apache.struts2.convention.ss,com.opensymphony.xwork2.util.location.ss,com.opensymphony.xwork2.util.logging.log4j2.ss,org.apache.struts2.views.java.ss,org.apache.struts2.rest.ss,org.apache.struts2.jasper.xmlparser.ss,org.apache.struts2.views.gxp.ss,org.apache.struts2.portlet.dispatcher.ss,com.opensymphony.xwork2.ognl.accessor.ss,org.apache.struts2.views.tiles.ss,org.apache.struts2.dispatcher.listener.ss,com.opensymphony.xwork2.config.entities.ss,org.apache.struts2.views.jsp.iterator.ss,org.apache.struts2.sitegraph.ss,org.apache.struts2.json.smd.ss,org.apache.struts2.sitegraph.renderers.ss,org.apache.struts2.util.tomcat.buf.ss,com.opensymphony.xwork2.util.logging.jdk.ss,org.apache.struts2.views.ss,com.opensymphony.xwork2.util.logging.commons.ss,com.opensymphony.xwork2.conversion.impl.ss,org.apache.struts2.config_browser.ss,org.apache.struts2.el.parser.ss,org.apache.struts2.osgi.host.ss,com.opensymphony.xwork2.inject.util.ss,org.apache.struts2.result.ss,org.apache.struts2.views.jsp.ss,com.opensymphony.xwork2.util.classloader.ss,com.opensymphony.xwork2.config.impl.ss,org.apache.struts2.views.xslt.ss,com.opensymphony.xwork2.util.logging.ss,org.apache.struts2.plexus.ss,org.apache.struts2.spring.ss,org.apache.struts2.portlet.interceptor.ss,com.opensymphony.xwork2.config.providers.ss,org.apache.struts2.jasper.compiler.ss,org.apache.struts2.dispatcher.filter.ss,org.apache.struts2.osgi.interceptor.ss,org.apache.struts2.el.lang.ss,org.apache.struts2.portlet.ss,org.apache.struts2.dispatcher.mapper.ss,org.apache.struts2.dispatcher.servlet.ss,com.opensymphony.xwork2.util.logging.slf4j.ss,org.apache.struts2.jasper.servlet.ss,org.apache.struts2.el.util.ss,org.apache.struts2.portlet.servlet.ss,org.apache.struts2.views.java.simple.ss,actions.osgi.ss,org.apache.struts2.views.freemarker.ss,org.apache.struts2.views.jasperreports.ss,org.apache.struts2.json.ss,org.apache.struts2.jasper.runtime.ss,com.opensymphony.xwork2.config.ss,org.apache.struts2.jasper.tagplugins.jstl.ss,com.opensymphony.xwork2.util.ss,com.opensymphony.xwork2.interceptor.ss,org.apache.struts.beanvalidation.validation.interceptor.ss,org.apache.struts2.util.ss,org.apache.struts2.portlet.result.ss,com.opensymphony.xwork2.validator.ss,org.apache.struts2.dispatcher.ss,org.apache.struts2.osgi.ss,org.apache.struts2.sitemesh.ss,org.apache.struts2.components.template.ss,com.opensymphony.xwork2.ss,com.opensymphony.xwork2.validator.validators.ss,org.apache.struts2.views.velocity.ss
+DEBUG - 	buo org.apache.struts2.rest.ss
+DEBUG - 	buo org.apache.struts2.views.ss
+DEBUG - 	buo org.apache.struts2.el.parser.ss
+DEBUG - 	buo org.apache.struts2.views.xslt.ss
+DEBUG - 	buo com.opensymphony.xwork2.config.providers.ss
+DEBUG - 	buo org.apache.struts2.views.java.simple.ss
+DEBUG - 	buo org.apache.struts2.dispatcher.ss
+DEBUG - 	buo org.apache.struts2.components.ss
+DEBUG - 	buo org.apache.struts2.ss
+DEBUG - 	buo org.apache.struts2.jasper.compiler.ss
+DEBUG - 	buo org.apache.struts2.jasper.runtime.ss
+DEBUG - 	buo org.apache.struts2.json.ss
+DEBUG - struts-2.5.10.1_acdc_smells.ser
+DEBUG - 	contains 16 smells
+DEBUG - 	Listing detected smells for filestruts-2.5.10.1_acdc_smells.ser: 
+DEBUG - 	bdc org.apache.struts2.views.freemarker.tags.ss,org.apache.struts2.el.ss,org.apache.struts2.config.ss,org.apache.struts2.interceptor.ss,org.apache.struts2.osgi.loaders.ss,org.apache.struts2.components.ss,org.apache.struts2.jasper.ss,org.apache.struts2.portlet.util.ss,com.opensymphony.xwork2.spring.ss,com.opensymphony.xwork2.ognl.ss,org.apache.struts2.validators.ss,org.apache.struts2.osgi.admin.actions.ss,com.opensymphony.xwork2.util.profiling.ss,org.apache.struts2.ss,com.opensymphony.xwork2.interceptor.annotations.ss,org.apache.struts2.factory.ss,org.apache.struts2.interceptor.debugging.ss,org.apache.struts2.tiles.ss,com.opensymphony.xwork2.inject.ss,org.apache.struts2.json.annotations.ss,org.apache.struts2.views.velocity.components.ss,org.apache.struts2.oval.interceptor.ss,org.apache.struts2.views.jsp.ui.ss,org.apache.struts2.dispatcher.multipart.ss,com.opensymphony.xwork2.util.finder.ss,org.apache.struts2.jasper.el.ss,org.apache.struts2.convention.ss,com.opensymphony.xwork2.util.location.ss,com.opensymphony.xwork2.util.logging.log4j2.ss,org.apache.struts2.views.java.ss,org.apache.struts2.rest.ss,org.apache.struts2.jasper.xmlparser.ss,org.apache.struts2.views.gxp.ss,org.apache.struts2.portlet.dispatcher.ss,com.opensymphony.xwork2.ognl.accessor.ss,org.apache.struts2.views.tiles.ss,org.apache.struts2.dispatcher.listener.ss,com.opensymphony.xwork2.config.entities.ss,org.apache.struts2.views.jsp.iterator.ss,org.apache.struts2.sitegraph.ss,org.apache.struts2.json.smd.ss,org.apache.struts2.sitegraph.renderers.ss,org.apache.struts2.util.tomcat.buf.ss,com.opensymphony.xwork2.util.logging.jdk.ss,org.apache.struts2.views.ss,com.opensymphony.xwork2.util.logging.commons.ss,com.opensymphony.xwork2.conversion.impl.ss,org.apache.struts2.config_browser.ss,org.apache.struts2.el.parser.ss,org.apache.struts2.osgi.host.ss,com.opensymphony.xwork2.inject.util.ss,org.apache.struts2.result.ss,org.apache.struts2.views.jsp.ss,org.apache.struts2.views.xslt.ss,com.opensymphony.xwork2.util.logging.ss,com.opensymphony.xwork2.config.impl.ss,com.opensymphony.xwork2.util.classloader.ss,org.apache.struts2.plexus.ss,org.apache.struts2.portlet.interceptor.ss,org.apache.struts2.spring.ss,com.opensymphony.xwork2.config.providers.ss,org.apache.struts2.jasper.compiler.ss,org.apache.struts2.dispatcher.filter.ss,org.apache.struts2.osgi.interceptor.ss,org.apache.struts2.el.lang.ss,org.apache.struts2.portlet.ss,org.apache.struts2.dispatcher.servlet.ss,org.apache.struts2.dispatcher.mapper.ss,com.opensymphony.xwork2.util.logging.slf4j.ss,org.apache.struts2.jasper.servlet.ss,org.apache.struts2.el.util.ss,org.apache.struts2.portlet.servlet.ss,actions.osgi.ss,org.apache.struts2.views.java.simple.ss,org.apache.struts2.views.freemarker.ss,org.apache.struts2.views.jasperreports.ss,org.apache.struts2.json.ss,org.apache.struts2.jasper.runtime.ss,com.opensymphony.xwork2.config.ss,org.apache.struts2.jasper.tagplugins.jstl.ss,com.opensymphony.xwork2.util.ss,com.opensymphony.xwork2.interceptor.ss,org.apache.struts.beanvalidation.validation.interceptor.ss,org.apache.struts2.util.ss,org.apache.struts2.portlet.result.ss,com.opensymphony.xwork2.validator.ss,org.apache.struts2.dispatcher.ss,org.apache.struts2.osgi.ss,org.apache.struts2.sitemesh.ss,org.apache.struts2.components.template.ss,com.opensymphony.xwork2.ss,com.opensymphony.xwork2.validator.validators.ss,org.apache.struts2.views.velocity.ss
+DEBUG - 	buo org.apache.struts2.interceptor.ss
+DEBUG - 	buo org.apache.struts2.views.ss
+DEBUG - 	buo org.apache.struts2.el.parser.ss
+DEBUG - 	buo org.apache.struts2.views.xslt.ss
+DEBUG - 	buo com.opensymphony.xwork2.config.providers.ss
+DEBUG - 	buo org.apache.struts2.views.java.simple.ss
+DEBUG - 	buo com.opensymphony.xwork2.util.ss
+DEBUG - 	buo org.apache.struts2.dispatcher.ss
+DEBUG - 	buo org.apache.struts2.components.ss
+DEBUG - 	buo org.apache.struts2.ss
+DEBUG - 	buo org.apache.struts2.convention.ss
+DEBUG - 	buo org.apache.struts2.jasper.compiler.ss
+DEBUG - 	buo org.apache.struts2.jasper.runtime.ss
+DEBUG - 	buo org.apache.struts2.json.ss
+DEBUG - 	buo org.apache.struts2.sitemesh.ss
+DEBUG - DescriptiveStatistics:
+n: 5
+min: 13.0
+max: 16.0
+mean: 14.2
+std dev: 1.3038404810405297
+median: 14.0
+skewness: 0.5413870509510876
+kurtosis: -1.487889273356398
+

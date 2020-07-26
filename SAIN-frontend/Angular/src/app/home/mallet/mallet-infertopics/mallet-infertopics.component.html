@@ -1,0 +1,142 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Mallet Infer Topics</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Input) Input File Path<span class="text-danger">:</span></label>
+                                <input name="inputFile" type="text" class="form-control" formControlName="inputFile" [ngClass]="{ 'is-invalid': submitted &&  f.inputFile.errors}">                                
+                                <div *ngIf="submitted && f.inputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputFile.errors.required">Required topic model input</div>
+                                </div>                                  
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Inferencer File Name Path<span class="text-danger">:</span></label>
+                                <input name="inferencerFilename" type="text" class="form-control" formControlName="inferencerFilename" [ngClass]="{ 'is-invalid': submitted &&  f.inferencerFilename.errors}">                                
+                                <div *ngIf="submitted && f.inferencerFilename.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inferencerFilename.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">(Output) Doc Topics File: The file in which to write the topic proportions per document, at the end of the iterations<span class="text-danger">:</span></label>
+                                <input name="outputDocTopics" type="text" class="form-control" formControlName="outputDocTopics" [ngClass]="{ 'is-invalid': submitted &&  f.outputDocTopics.errors}">
+                                <div *ngIf="submitted && f.outputDocTopics.errors" class="invalid-feedback">
+                                    <div *ngIf="f.outputDocTopics.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Prefix code ('JAVA CODE')<span class="text-danger">:</span></label>
+                                <input name="prefixCode" type="text" class="form-control" formControlName="prefixCode" [ngClass]="{ 'is-invalid': submitted &&  f.prefixCode.errors}">
+                                <div *ngIf="submitted && f.prefixCode.errors" class="invalid-feedback">
+                                    <div *ngIf="f.prefixCode.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Doc topics proportions threshold/lower boundaries (default is 0.0)<span class="text-danger">:</span></label>
+                                <input name="doctopicsThreshold" type="text" class="form-control" formControlName="doctopicsThreshold" [ngClass]="{ 'is-invalid': submitted &&  f.doctopicsThreshold.errors}">                                
+                                <!-- <div *ngIf="submitted && f.doctopicsThreshold.errors" class="invalid-feedback">
+                                    <div *ngIf="f.doctopicsThreshold.errors.required">Required inferencer filename</div>
+                                </div>                                   -->
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Doc Topics Max<span class="text-danger">:</span></label>
+                                <input name="docTopicsMax" type="text" class="form-control" formControlName="docTopicsMax" [ngClass]="{ 'is-invalid': submitted &&  f.docTopicsMax.errors}">
+                                <div *ngIf="submitted && f.docTopicsMax.errors" class="invalid-feedback">
+                                    <div *ngIf="f.docTopicsMax.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>    
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Number of Iterations (default is 1000)<span class="text-danger">:</span></label>
+                                <input name="numIterations" type="text" class="form-control" formControlName="numIterations" [ngClass]="{ 'is-invalid': submitted &&  f.numIterations.errors}">                                
+                                <!-- <div *ngIf="submitted && f.numIterations.errors" class="invalid-feedback">
+                                    <div *ngIf="f.numIterations.errors.required">Required inferencer filename</div>
+                                </div>                                   -->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Sample Interval: The number of iterations between saved samples (default is 10)<span class="text-danger">:</span></label>
+                                <input name="sampleInterval" type="text" class="form-control" formControlName="sampleInterval" [ngClass]="{ 'is-invalid': submitted &&  f.sampleInterval.errors}">                                
+                                <!-- <div *ngIf="submitted && f.sampleInterval.errors" class="invalid-feedback">
+                                    <div *ngIf="f.sampleInterval.errors.required">Required inferencer filename</div>
+                                </div>-->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Burn In: The number of iterations before the first sample is saved (default is 10)<span class="text-danger">:</span></label>
+                                <input name="burnIn" type="text" class="form-control" formControlName="burnIn" [ngClass]="{ 'is-invalid': submitted &&  f.burnIn.errors}">                                
+                                <!-- <div *ngIf="submitted && f.burnIn.errors" class="invalid-feedback">
+                                    <div *ngIf="f.burnIn.errors.required">Required inferencer filename</div>
+                                </div>-->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Random Seed<span class="text-danger">:</span></label>
+                                <input name="randomSeed" type="text" class="form-control" formControlName="randomSeed" [ngClass]="{ 'is-invalid': submitted &&  f.randomSeed.errors}">
+                                <div *ngIf="submitted && f.randomSeed.errors" class="invalid-feedback">
+                                    <div *ngIf="f.randomSeed.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>     
+
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>

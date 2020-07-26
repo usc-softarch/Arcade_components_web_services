@@ -1,0 +1,163 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Mallet hlda</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Input) Input File<span class="text-danger">:</span></label>
+                                <input name="inputFile" type="text" class="form-control" formControlName="inputFile" [ngClass]="{ 'is-invalid': submitted &&  f.inputFile.errors}">                                
+                                <div *ngIf="submitted && f.inputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputFile.errors.required">Required topic model input</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Prefix code ('JAVA CODE')<span class="text-danger">:</span></label>
+                                <input name="prefixCode" type="text" class="form-control" formControlName="prefixCode" [ngClass]="{ 'is-invalid': submitted &&  f.prefixCode.errors}">
+                                <div *ngIf="submitted && f.prefixCode.errors" class="invalid-feedback">
+                                    <div *ngIf="f.prefixCode.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Testing File: from which to read the list of instances for held-out likelihood calculation<span class="text-danger">:</span></label>
+                                <input name="testingFile" type="text" class="form-control" formControlName="testingFile" [ngClass]="{ 'is-invalid': submitted &&  f.testingFile.errors}">                                
+                                <div *ngIf="submitted && f.testingFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.testingFile.errors.required">Required field!</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Output State Interval: number of iterations between writing the sampling state to a text file<span class="text-danger">:</span></label>
+                                <input name="outputStateInterval" type="text" class="form-control" formControlName="outputStateInterval" [ngClass]="{ 'is-invalid': submitted &&  f.outputStateInterval.errors}">
+                                <div *ngIf="submitted && f.outputStateInterval.errors" class="invalid-feedback">
+                                    <div *ngIf="f.outputStateInterval.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Random Seed<span class="text-danger">:</span></label>
+                                <input name="randomSeed" type="text" class="form-control" formControlName="randomSeed" [ngClass]="{ 'is-invalid': submitted &&  f.randomSeed.errors}">
+                                <div *ngIf="submitted && f.randomSeed.errors" class="invalid-feedback">
+                                    <div *ngIf="f.randomSeed.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>   
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Show Progress (default is true)<span class="text-danger">:</span></label>                               
+                                <select formControlName="showProgress" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.showProgress.errors}" >
+                                    <option>true</option> 
+                                    <option>false</option>   
+                                </select>                                
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Show Topics Interval (number of iterations between printing a brief summary of the topics so far)<span class="text-danger">:</span></label>
+                                <input name="showTopicsInterval" type="text" class="form-control" formControlName="showTopicsInterval" [ngClass]="{ 'is-invalid': submitted &&  f.showTopicsInterval.errors}">
+                                <div *ngIf="submitted && f.showTopicsInterval.errors" class="invalid-feedback">
+                                    <div *ngIf="f.showTopicsInterval.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Number of top (most probable) words for each topic (default is 20))<span class="text-danger">:</span></label>
+                                <input name="numtopwords" type="text" class="form-control" formControlName="numtopwords" [ngClass]="{ 'is-invalid': submitted &&  f.numtopwords.errors}">                                
+                                <!-- <div *ngIf="submitted && f.numtopwords.errors" class="invalid-feedback">
+                                    <div *ngIf="f.numtopwords.errors.required">Required inferencer filename</div>
+                                </div>                                   -->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">Num Levels: The number of levels in the tree<span class="text-danger">:</span></label>
+                                <input name="numLevels" type="text" class="form-control" formControlName="numLevels" [ngClass]="{ 'is-invalid': submitted &&  f.numLevels.errors}">                                
+                                <!-- <div *ngIf="submitted && f.numLevels.errors" class="invalid-feedback">
+                                    <div *ngIf="f.numLevels.errors.required">Required inferencer filename</div>
+                                </div>                                   -->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Alpha parameter: smoothing over topic distribution<span class="text-danger">:</span></label>
+                                <input name="alpha" type="text" class="form-control" formControlName="alpha" [ngClass]="{ 'is-invalid': submitted &&  f.alpha.errors}">
+                                <!-- <div *ngIf="submitted && f.alpha.errors" class="invalid-feedback">
+                                    <div *ngIf="f.alpha.errors.required">Required field!</div>
+                                </div>                             -->
+                            </div>
+                        </div>     
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Gamma parameter: smoothing over topic distribution<span class="text-danger">:</span></label>
+                                <input name="gamma" type="text" class="form-control" formControlName="gamma" [ngClass]="{ 'is-invalid': submitted &&  f.gamma.errors}">
+                                <!-- <div *ngIf="submitted && f.gamma.errors" class="invalid-feedback">
+                                    <div *ngIf="f.gamma.errors.required">Required field!</div>
+                                </div>                             -->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Eta parameter: smoothing over topic-word distributions<span class="text-danger">:</span></label>
+                                <input name="eta" type="text" class="form-control" formControlName="eta" [ngClass]="{ 'is-invalid': submitted &&  f.eta.errors}">
+                                <div *ngIf="submitted && f.eta.errors" class="invalid-feedback">
+                                    <div *ngIf="f.eta.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>

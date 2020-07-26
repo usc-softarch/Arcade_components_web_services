@@ -1,0 +1,63 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Arcade PipeExtractor</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Input) Source Dir Path<span class="text-danger">:</span></label>
+                                <input name="srcDir" type="text" class="form-control" formControlName="srcDir" [ngClass]="{ 'is-invalid': submitted &&  f.srcDir.errors}">
+                                
+                                <div *ngIf="submitted && f.srcDir.errors" class="invalid-feedback">
+                                    <div *ngIf="f.srcDir.errors.required">Required source dir input</div>
+                                </div>                                  
+                            </div>
+                        </div>
+                       
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">(Output) Output Dir Path<span class="text-danger">:</span></label>
+                                <input name="outputDir" type="text" class="form-control" formControlName="outputDir" [ngClass]="{ 'is-invalid': submitted &&  f.outputDir.errors}">
+                                <!-- <label class="custom-file-label" for="dsmfiles">{{structurl_DSM}}</label> -->
+                                <div *ngIf="submitted && f.outputDir.errors" class="invalid-feedback">
+                                    <div *ngIf="f.outputDir.errors.required">Required output location</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>

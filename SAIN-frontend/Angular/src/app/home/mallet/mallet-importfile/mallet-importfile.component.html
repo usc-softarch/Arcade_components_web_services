@@ -1,0 +1,227 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Mallet Import File</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Input) Input File Path<span class="text-danger">:</span></label>
+                                <input name="inputFile" type="text" class="form-control" formControlName="inputFile" [ngClass]="{ 'is-invalid': submitted &&  f.inputFile.errors}">                                
+                                <div *ngIf="submitted && f.inputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputFile.errors.required">Required source dir input</div>
+                                </div>                                  
+                            </div>
+                        </div>
+                       
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">(Output) Output File Path<span class="text-danger">:</span></label>
+                                <input name="outputFile" type="text" class="form-control" formControlName="outputFile" [ngClass]="{ 'is-invalid': submitted &&  f.outputFile.errors}">
+                                <!-- <label class="custom-file-label" for="dsmfiles">{{structurl_DSM}}</label> -->
+                                <div *ngIf="submitted && f.outputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.outputFile.errors.required">Required output location</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Remove topwords - remove default list of common English "stop words" from text<span class="text-danger">:</span></label>                               
+                                <select formControlName="removeStopwords" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.removeStopwords.errors}" >
+                                    <option>TRUE</option>
+                                    <option>FALSE</option>                                   
+                                </select>
+                                <!-- <div *ngIf="submitted && f.removeStopwords.errors" class="invalid-feedback">
+                                    <div *ngIf="submitted && f.removeStopwords.errors">Log Type is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Keep Sequence - final data will be a FeatureSequenceWithBigrams rather than a FeatureVector<span class="text-danger">:</span></label>                               
+                                <select formControlName="keepSequence" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.keepSequence.errors}" >
+                                    <option>TRUE</option> 
+                                    <option>FALSE</option>   
+                                </select>
+                                <!-- <div *ngIf="submitted && f.keepSequence.errors" class="invalid-feedback">
+                                    <div *ngIf="submitted && f.keepSequence.errors">Log Type is required</div>
+                                </div> -->
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Prefix code ('JAVA CODE')<span class="text-danger">:</span></label>
+                                <input name="prefixCode" type="text" class="form-control" formControlName="prefixCode" [ngClass]="{ 'is-invalid': submitted &&  f.prefixCode.errors}">
+                                <div *ngIf="submitted && f.prefixCode.errors" class="invalid-feedback">
+                                    <div *ngIf="f.prefixCode.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Line-Regex: Regular expression containing regex-groups for label, name and data<span class="text-danger">:</span></label>
+                                <input name="lineRegex" type="text" class="form-control" formControlName="lineRegex" [ngClass]="{ 'is-invalid': submitted &&  f.lineRegex.errors}">
+                                <div *ngIf="submitted && f.lineRegex.errors" class="invalid-feedback">
+                                    <div *ngIf="f.lineRegex.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Label: The index of the group containing the label string<span class="text-danger">:</span></label>
+                                <input name="label" type="text" class="form-control" formControlName="label" [ngClass]="{ 'is-invalid': submitted &&  f.label.errors}">
+                                <div *ngIf="submitted && f.label.errors" class="invalid-feedback">
+                                    <div *ngIf="f.label.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Name: The index of the group containing the instance name<span class="text-danger">:</span></label>
+                                <input name="name" type="text" class="form-control" formControlName="name" [ngClass]="{ 'is-invalid': submitted &&  f.name.errors}">
+                                <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Data: The index of the group containing the data<span class="text-danger">:</span></label>
+                                <input name="data" type="text" class="form-control" formControlName="data" [ngClass]="{ 'is-invalid': submitted &&  f.data.errors}">
+                                <div *ngIf="submitted && f.data.errors" class="invalid-feedback">
+                                    <div *ngIf="f.data.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                         <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Preserve Case<span class="text-danger">:</span></label>                               
+                                <select formControlName="preserveCase" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.preserveCase.errors}" >
+                                    <option>TRUE</option> 
+                                    <option>FALSE</option>   
+                                </select>                                
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Use Pipe from File<span class="text-danger">:</span></label>
+                                <input name="usePipefromFile" type="text" class="form-control" formControlName="usePipefromFile" [ngClass]="{ 'is-invalid': submitted &&  f.usePipefromFile.errors}">                                
+                                <div *ngIf="submitted && f.usePipefromFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.usePipefromFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Stoplist File<span class="text-danger">:</span></label>
+                                <input name="stoplistFile" type="text" class="form-control" formControlName="stoplistFile" [ngClass]="{ 'is-invalid': submitted &&  f.stoplistFile.errors}">                                
+                                <div *ngIf="submitted && f.stoplistFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.stoplistFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Extra Stopwords<span class="text-danger">:</span></label>
+                                <input name="extraStopwords" type="text" class="form-control" formControlName="extraStopwords" [ngClass]="{ 'is-invalid': submitted &&  f.extraStopwords.errors}">                                
+                                <div *ngIf="submitted && f.extraStopwords.errors" class="invalid-feedback">
+                                    <div *ngIf="f.extraStopwords.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Binary Features<span class="text-danger">:</span></label>                               
+                                <select formControlName="keepSequenceBigrams" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.keepSequenceBigrams.errors}" >
+                                    <option>TRUE</option> 
+                                    <option>FALSE</option>   
+                                </select>
+                               
+                            </div>
+                        </div>        
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Encoding<span class="text-danger">:</span></label>
+                                <input name="encoding" type="text" class="form-control" formControlName="encoding" [ngClass]="{ 'is-invalid': submitted &&  f.encoding.errors}">                                
+                                <div *ngIf="submitted && f.encoding.errors" class="invalid-feedback">
+                                    <div *ngIf="f.encoding.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">     
+                                <!-- <label class="form-label">Token-regex - Example: "[\p{L}\p{N}_]+|[\p{P}]+" (unicode letters, numbers and underscore OR all punctuation)<span class="text-danger">:</span></label>                            -->
+                                <label class="form-label">Token-regex<span class="text-danger">:</span></label>
+                                <input name="tokenRegex" type="text" class="form-control" formControlName="tokenRegex" [ngClass]="{ 'is-invalid': submitted &&  f.tokenRegex.errors}">                                
+                                <div *ngIf="submitted && f.tokenRegex.errors" class="invalid-feedback">
+                                    <div *ngIf="f.tokenRegex.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Print Output<span class="text-danger">:</span></label>                               
+                                <select formControlName="printOutput" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.printOutput.errors}" >
+                                    <option>TRUE</option> 
+                                    <option>FALSE</option>   
+                                </select>
+                                
+                            </div>
+                        </div> 
+
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>

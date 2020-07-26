@@ -1,0 +1,19 @@
+INFO  - Reading in clusters file: D:\joshuaga-arcade-21f0389ea498\joshuaga-arcade-21f0389ea498\subject_systems\Struts2\acdc\dep
+DEBUG - Elapsed time in milliseconds: 10
+DEBUG - Found and built clusters:
+INFO  - Reading in deps file: D:\joshuaga-arcade-21f0389ea498\joshuaga-arcade-21f0389ea498\subject_systems\Struts2\acdc\cluster
+DEBUG - Elapsed time in milliseconds: 5
+DEBUG - No. of vertices: 0
+DEBUG - No. of edges: 0
+DEBUG - # actual edges: 0
+DEBUG - # potential edges: 0
+INFO  - rci: NaN
+INFO  - no. of two-way pairs: 0
+INFO  - no. of two-way pairs / all possible pairs: NaN
+INFO  - avg stability: NaN
+DEBUG - Elapsed time in milliseconds: 8
+DEBUG - Elapsed time in milliseconds: 7
+INFO  - MQ: 0.0
+INFO  - # of clusters: 0
+INFO  - MQ ratio: NaN
+INFO  - 

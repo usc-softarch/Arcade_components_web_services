@@ -1,0 +1,187 @@
+<div class="container py-8">
+    <div class="card border-dark mb-3">
+        <div class="card-header text-center bg-gray-3  py-0" style="font-family:Georgia, 'Times New Roman', Times, serif"> 
+            <h4 class="card-title mt-2">Mallet Split</h4>
+        </div>
+
+        <div *ngIf="!auth.isLoggedIn()">
+            <a style="font-family:Georgia, 'Times New Roman', Times, serif; color:black;" routerLink="/login">&nbsp;Please Sign In.</a>
+        </div>
+        <div *ngIf="auth.isLoggedIn()"> 
+            <div class="row p-6 justify-content-center" *ngIf="!results">
+                <div *ngIf="isLoading" style="text-align: center;">
+                    <app-loading-spinner></app-loading-spinner>
+                </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="error">
+                    <strong>Error!</strong> {{ error }}
+                </div>
+                <div *ngIf="!isLoading && !submitted"  class="col-md-12 p-4">
+                    <form  [formGroup]="dataForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Input) Input File Path<span class="text-danger">:</span></label>
+                                <input name="inputFile" type="text" class="form-control" formControlName="inputFile" [ngClass]="{ 'is-invalid': submitted &&  f.inputFile.errors}">                                
+                                <div *ngIf="submitted && f.inputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.inputFile.errors.required">Required topic model input</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                               
+                               <label class="form-label">(Output) Output File Name Path<span class="text-danger">:</span></label>
+                                <input name="outputFile" type="text" class="form-control" formControlName="outputFile" [ngClass]="{ 'is-invalid': submitted &&  f.outputFile.errors}">                                
+                                <div *ngIf="submitted && f.outputFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.outputFile.errors.required">Required inferencer filename</div>
+                                </div>                                  
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Prefix code ('JAVA CODE')<span class="text-danger">:</span></label>
+                                <input name="prefixCode" type="text" class="form-control" formControlName="prefixCode" [ngClass]="{ 'is-invalid': submitted &&  f.prefixCode.errors}">
+                                <div *ngIf="submitted && f.prefixCode.errors" class="invalid-feedback">
+                                    <div *ngIf="f.prefixCode.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Training Portion: The fraction of the instances that should be used for training<span class="text-danger">:</span></label>
+                                <input name="trainingPortion" type="text" class="form-control" formControlName="trainingPortion" [ngClass]="{ 'is-invalid': submitted &&  f.trainingPortion.errors}">
+                                <div *ngIf="submitted && f.trainingPortion.errors" class="invalid-feedback">
+                                    <div *ngIf="f.trainingPortion.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Validation Portion: The fraction of the instances that should be used for validation<span class="text-danger">:</span></label>
+                                <input name="validationPortion" type="text" class="form-control" formControlName="validationPortion" [ngClass]="{ 'is-invalid': submitted &&  f.validationPortion.errors}">
+                                <div *ngIf="submitted && f.validationPortion.errors" class="invalid-feedback">
+                                    <div *ngIf="f.validationPortion.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Random Seed<span class="text-danger">:</span></label>
+                                <input name="randomSeed" type="text" class="form-control" formControlName="randomSeed" [ngClass]="{ 'is-invalid': submitted &&  f.randomSeed.errors}">
+                                <div *ngIf="submitted && f.randomSeed.errors" class="invalid-feedback">
+                                    <div *ngIf="f.randomSeed.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Training File: Read the training set instance list from this file<span class="text-danger">:</span></label>
+                                <input name="trainingFile" type="text" class="form-control" formControlName="trainingFile" [ngClass]="{ 'is-invalid': submitted &&  f.trainingFile.errors}">
+                                <div *ngIf="submitted && f.trainingFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.trainingFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Testing File: Read the test set instance list to this file<span class="text-danger">:</span></label>
+                                <input name="testingFile" type="text" class="form-control" formControlName="testingFile" [ngClass]="{ 'is-invalid': submitted &&  f.testingFile.errors}">
+                                <div *ngIf="submitted && f.testingFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.testingFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div> 
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Validation File: Read the validation set instance list to this file<span class="text-danger">:</span></label>
+                                <input name="validationFile" type="text" class="form-control" formControlName="validationFile" [ngClass]="{ 'is-invalid': submitted &&  f.validationFile.errors}">
+                                <div *ngIf="submitted && f.validationFile.errors" class="invalid-feedback">
+                                    <div *ngIf="f.validationFile.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Prune Infogain N: Reduce features to the top N by information gain<span class="text-danger">:</span></label>
+                                <input name="pruneInfogain" type="text" class="form-control" formControlName="pruneInfogain" [ngClass]="{ 'is-invalid': submitted &&  f.pruneInfogain.errors}">
+                                <div *ngIf="submitted && f.pruneInfogain.errors" class="invalid-feedback">
+                                    <div *ngIf="f.pruneInfogain.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">                                
+                                <label class="form-label">Prune Count N: Reduce features to those that occur more than N times<span class="text-danger">:</span></label>
+                                <input name="pruneInfogain" type="text" class="form-control" formControlName="pruneInfogain" [ngClass]="{ 'is-invalid': submitted &&  f.pruneInfogain.errors}">
+                                <div *ngIf="submitted && f.pruneInfogain.errors" class="invalid-feedback">
+                                    <div *ngIf="f.pruneInfogain.errors.required">Required field!</div>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Vector To Sequence: Convert FeatureVector's to FeatureSequence's<span class="text-danger">:</span></label>                               
+                                <select formControlName="vectorToSequence" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.vectorToSequence.errors}" >
+                                    <option>true</option> 
+                                    <option>false</option>   
+                                </select>                                
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Hide Targets<span class="text-danger">:</span></label>                               
+                                <select formControlName="hideTargets" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.hideTargets.errors}" >
+                                    <option>true</option> 
+                                    <option>false</option>   
+                                </select>                                
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label class="form-label">Reveal Targets<span class="text-danger">:</span></label>                               
+                                <select formControlName="revealTargets" id="inputState" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f.revealTargets.errors}" >
+                                    <option>true</option> 
+                                    <option>false</option>   
+                                </select>                                
+                            </div>
+                        </div>
+                        
+                        <br>
+                        <hr>
+                        <div class="form-group mt-5">
+                            <button type="submit" class="btn btn-primary-dark-w min-width-200"> Submit  </button>
+                            <button type="button" class="btn btn-primary-dark-w float-right min-width-200"> Cancel  </button>
+                        </div> <!-- form-group// --> 
+                    </form>
+                </div>
+            </div>
+
+            <div class="row py-18 px-0 justify-content-center m-2"  *ngIf="results">
+                <div class="col-md-8 bg-gray-3 py-3"> 
+                    <strong>Success! {{ results }}</strong>
+                </div>
+                <!-- <div class="col-md-4 "> 
+                    <button type="button" class="btn btn-primary-dark-w float-right min-width-200 min-height-40" (click)="downloadResults()"><i class="fa fa-download" aria-hidden="true"></i> Downlod Results </button>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
